@@ -6,7 +6,7 @@ import { Icon } from "astro-icon";
 <div class="hero">
   <div class="background"></div>
   <div class="foreground">
-    <img class="logo" src="/logo.png" alt="Poterie par Kathy" />
+    <img class="logo" src={`${import.meta.env.BASE_URL}/logo.png`} alt="Poterie par Kathy" />
     <h1>Poterie fabriquée à la main à Montréal</h1>
     <div class="social">
       <a title="Page Facebook" href="https://www.instagram.com/poterie.par.kathy/">
