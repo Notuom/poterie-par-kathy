@@ -1,0 +1,24 @@
+---
+import posts from "../../data/instagram/posts.json";
+---
+
+<div class="posts">
+  {
+    posts.map((post) => (
+      <a href={post.permalink} target="_blank">
+        <img src={post.media_url} alt={post.caption} />
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  }
+  a, img {
+    display: block;
+    max-width: 100%;
+  }
+</style>
