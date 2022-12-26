@@ -1,0 +1,27 @@
+name: Update Posts from Instagram
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  update_posts:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install
+      shell: "bash"
+      run: npm install
+
+    - name: Update
+      shell: "bash"
+      run: npm run update-data
+
+    - name: Commit and push
+      uses: EndBug/add-and-commit@v9
+      with:
+        push: true
