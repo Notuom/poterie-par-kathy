@@ -1,0 +1,43 @@
+---
+import filters from "../../data/instagram/filters.json";
+---
+
+<div class="posts-filters">
+  {
+    filters.map((filter) => (
+      <button type="button" data-filter={filter.filter}>
+        {filter.label}
+      </button>
+    ))
+  }
+</div>
+
+<script is:inline>
+  const BUTTONS = "button[data-filter]";
+  const POSTS = ".posts > a";
+
+  document.querySelectorAll(BUTTONS).forEach((buttonNode) => {
+    buttonNode.addEventListener("click", (event) => {
+      event.preventDefault();
+      const filters = event.currentTarget
+        .getAttribute("data-filter")
+        .split(",");
+
+      if (filters.length > 0 && filters[0] !== "") {
+        document.querySelectorAll(POSTS).forEach((postNode) => {
+          const caption = postNode.querySelector("img").getAttribute("alt");
+          const filtersMatched = filters.some((filter) =>
+            caption.includes(filter)
+          );
+          filtersMatched
+            ? postNode.removeAttribute("hidden")
+            : postNode.setAttribute("hidden", "");
+        });
+      } else {
+        document
+          .querySelectorAll(POSTS)
+          .forEach((postNode) => postNode.removeAttribute("hidden"));
+      }
+    });
+  });
+</script>

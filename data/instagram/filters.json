@@ -1,0 +1,18 @@
+[
+  {
+    "label": "All",
+    "filter": ""
+  },
+  {
+    "label": "Tasses",
+    "filter": "tasse"
+  },
+  {
+    "label": "Vases",
+    "filter": "vase"
+  },
+  {
+    "label": "Décorations",
+    "filter": ["sapin", "ornement", "citrouille"]
+  }
+]
