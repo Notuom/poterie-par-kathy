@@ -37,3 +37,4 @@ jobs:
 
   call_deploy:
     uses: Notuom/poterie-par-kathy/.github/workflows/deploy.yml@main
+    needs: update_posts
