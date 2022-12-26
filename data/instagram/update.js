@@ -1,5 +1,6 @@
 import { writeFileSync, existsSync } from "fs";
 import { fileURLToPath } from "url";
+import prettier from "prettier";
 import sharp from "sharp";
 
 const token = process.env.IG_TOKEN;
@@ -58,10 +59,14 @@ const ALLOWED_POST_TYPES = ["IMAGE", "CAROUSEL_ALBUM"];
     })
   );
 
-  const outputPath = new URL("posts.json", import.meta.url);
+  const outputPath = fileURLToPath(new URL("posts.json", import.meta.url));
   console.log(`Writing result to ${outputPath}...`);
   try {
-    writeFileSync(outputPath, JSON.stringify(finalPosts));
+    await prettier.resolveConfig(outputPath);
+    writeFileSync(
+      outputPath,
+      prettier.format(JSON.stringify(finalPosts), { filepath: outputPath })
+    );
   } catch (e) {
     console.error("Error writing posts file", outputPath, e);
   }
