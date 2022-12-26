@@ -6,7 +6,10 @@ import posts from "../../data/instagram/posts.json";
   {
     posts.map((post) => (
       <a href={post.permalink} target="_blank">
-        <img src={post.media_url} alt={post.caption} />
+        <img
+          src={`${import.meta.env.BASE_URL}/images/posts/${post.id}.jpg`}
+          alt={post.caption}
+        />
       </a>
     ))
   }
@@ -17,8 +20,9 @@ import posts from "../../data/instagram/posts.json";
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   }
-  a, img {
+  a,
+  img {
     display: block;
-    max-width: 100%;
+    width: 100%;
   }
 </style>

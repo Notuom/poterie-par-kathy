@@ -1,4 +1,6 @@
-import { writeFileSync } from "fs";
+import { writeFileSync, existsSync } from "fs";
+import { fileURLToPath } from "url";
+import sharp from "sharp";
 
 const token = process.env.IG_TOKEN;
 
@@ -27,12 +29,29 @@ const ALLOWED_POST_TYPES = ["IMAGE", "CAROUSEL_ALBUM"];
     ALLOWED_POST_TYPES.includes(post.media_type)
   );
 
+  console.log("Resizing images");
+  imagePosts.forEach(async (post) => {
+    const imagePath = fileURLToPath(
+      new URL(`../../public/images/posts/${post.id}.jpg`, import.meta.url)
+    );
+    if (existsSync(imagePath)) {
+      console.log(`Image already exists for post ${post.id}`);
+      return;
+    }
+    console.log(`Resizing image for post ${post.id}`);
+    const buffer = await fetch(post.media_url).then((r) => r.arrayBuffer());
+    try {
+      await sharp(Buffer.from(buffer)).resize(400, 400).toFile(imagePath);
+    } catch (e) {
+      console.error("Error writing image to file", imagePath, e);
+    }
+  });
+
   const outputPath = new URL("posts.json", import.meta.url);
   console.log(`Writing result to ${outputPath}...`);
   try {
     writeFileSync(outputPath, JSON.stringify(imagePosts));
-  } catch (err) {
-    console.error(`Could not write to ${outputPath}`);
-    console.error(err);
+  } catch (e) {
+    console.error("Error writing posts file", outputPath, e);
   }
 })();
