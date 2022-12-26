@@ -3,7 +3,6 @@ name: Update Posts from Instagram
 on:
   schedule:
     - cron: "0 0 * * *"
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
 jobs:
@@ -35,3 +34,6 @@ jobs:
         with:
           message: "chore(automated): update posts from instagram"
           push: true
+
+  call_deploy:
+    uses: Notuom/poterie-par-kathy/.github/workflows/deploy.yml@main
