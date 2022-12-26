@@ -26,6 +26,8 @@ jobs:
 
       - name: Update
         shell: "bash"
+        with: # Set the secret as an input
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
         run: npm run update-data
 
       - name: Commit and push
