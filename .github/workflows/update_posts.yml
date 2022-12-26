@@ -6,23 +6,23 @@ on:
 
 jobs:
   update_posts:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install
-      shell: "bash"
-      run: npm install
+      - name: Install
+        shell: "bash"
+        run: npm install
 
-    - name: Update
-      shell: "bash"
-      run: npm run update-data
+      - name: Update
+        shell: "bash"
+        run: npm run update-data
 
-    - name: Commit and push
-      uses: EndBug/add-and-commit@v9
-      with:
-        message: "chore(automated): update posts from instagram"
-        push: true
+      - name: Commit and push
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "chore(automated): update posts from instagram"
+          push: true
