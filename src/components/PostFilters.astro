@@ -3,14 +3,41 @@ import filters from "../../data/instagram/filters.json";
 ---
 
 <div class="posts-filters">
+  Filtrer :
   {
-    filters.map((filter) => (
-      <button type="button" data-filter={filter.filter}>
+    filters.map((filter, index) => (
+      <button
+        class={index === 0 ? "active" : ""}
+        type="button"
+        data-filter={filter.filter}
+      >
         {filter.label}
       </button>
     ))
   }
 </div>
+
+<style>
+  .posts-filters {
+    margin: 1rem 0;
+  }
+  button {
+    border: 3px solid black;
+    border-radius: 100px;
+    background: none;
+    color: inherit;
+    padding: 0.5rem;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    margin: 0 0.25rem;
+  }
+  button:hover,
+  button:focus,
+  button.active {
+    background: var(--primary);
+  }
+</style>
 
 <script is:inline>
   const BUTTONS = "button[data-filter]";
@@ -22,6 +49,11 @@ import filters from "../../data/instagram/filters.json";
       const filters = event.currentTarget
         .getAttribute("data-filter")
         .split(",");
+
+      document
+        .querySelector("button[data-filter].active")
+        .classList.remove("active");
+      event.currentTarget.classList.add("active");
 
       if (filters.length > 0 && filters[0] !== "") {
         document.querySelectorAll(POSTS).forEach((postNode) => {

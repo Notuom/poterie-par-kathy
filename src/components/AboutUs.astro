@@ -1,0 +1,42 @@
+<article>
+  <h2>&Agrave; propos</h2>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor massa
+    non tellus posuere laoreet. Sed at risus erat. Pellentesque habitant morbi
+    tristique senectus et netus et malesuada fames ac turpis egestas. Ut libero
+    massa, sodales vitae felis ut, mattis sollicitudin libero.
+  </p>
+  <p>
+    Donec ipsum tortor, ultricies ut massa a, consequat fringilla massa. Proin
+    hendrerit fringilla cursus. Morbi aliquam semper ex, vel varius lacus
+    lobortis nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Suspendisse sed fermentum neque. Etiam convallis magna nisl, id varius sem
+    condimentum sit amet.
+  </p>
+  <img
+    src={`${import.meta.env.BASE_URL}/images/graphics/a-propos.jpg`}
+    alt="Poterie par Kathy. PLACEHOLDER. Stock photo."
+  />
+</article>
+
+<style>
+  article {
+    column-count: 1;
+  }
+  img {
+    width: 100%;
+  }
+  h2,
+  p {
+    text-align: justify;
+  }
+
+  @media screen and (min-width: 42rem) {
+    article {
+      column-count: 2;
+    }
+    img {
+      max-width: 24rem;
+    }
+  }
+</style>
