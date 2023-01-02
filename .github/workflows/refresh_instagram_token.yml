@@ -1,8 +1,8 @@
-name: Update Posts from Instagram
+name: Refresh Instagram API Token
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 1 * *"
   workflow_dispatch:
 
 # Allow one concurrent deployment
@@ -28,18 +28,9 @@ jobs:
         shell: "bash"
         run: npm install
 
-      - name: Update
+      - name: Refresh token and update secret
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PA_TOKEN }}
         shell: "bash"
-        run: npm run update-ig-data
-
-      - name: Commit and push
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: "chore(automated): update posts from instagram"
-          push: true
-
-  call_deploy:
-    uses: Notuom/poterie-par-kathy/.github/workflows/deploy.yml@main
-    needs: update_posts
+        run: npm run refresh-ig-token

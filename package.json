@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "update-data": "node data/instagram/update.js"
+    "update-ig-data": "node data/instagram/update-data.js",
+    "refresh-ig-token": "node data/instagram/refresh-token.js"
   },
   "dependencies": {
     "@fontsource/kalam": "^4.5.10",
@@ -18,6 +19,8 @@
     "sharp": "^0.31.3"
   },
   "devDependencies": {
+    "@octokit/core": "^4.1.0",
+    "libsodium-wrappers": "^0.7.10",
     "prettier": "^2.8.1",
     "prettier-plugin-astro": "^0.7.0"
   }
